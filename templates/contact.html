@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+{% block title %}
+<title>Contact</title>
+{% endblock title %}
+
+{% block content %}
+<style>
+    .contact-info {
+        display: flex;
+        justify-content: space-around;
+        margin-top: 30px;
+      }
+      .contact-info .info-box {
+        text-align: center;
+        transition: background-color 0.3s ease, box-shadow 0.3s ease;
+        padding: 20px;
+        border-radius: 10px;
+        color: darkblue;
+      }
+      .contact-info .info-box i {
+        font-size: 40px;
+        margin-bottom: 10px;
+      }
+      .contact-info .info-box:hover {
+        background-color: #f8f9fa;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+      }
+      .p1 {
+        background-image: url('/static/images/contact.jpg');
+        height: 50vh;
+        width: 100%;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+</style>
+
+<div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12 text-center p1">
+        <div class="d-flex justify-content-center align-items-center">
+            <h1 class="display-3">Contact</h1>
+        </div>
+        <div class="text-white">
+          <a href="/" class="ms-3 fs-4 fw-bold" style="text-decoration: none;">Home</a>
+          <a href="{% url 'contact' %}" class="ms-3 fs-4 fw-bold" style="text-decoration: none;">Contact</a>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <h2 class="text-center mb-4">Contact Information</h2>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="contact-info">
+          <div class="info-box">
+            <i class="fas fa-map-marker-alt text-primary"></i>
+            <h4>Address</h4>
+            <p>123 Car Wash Street, City, Country</p>
+          </div>
+          <div class="info-box">
+            <i class="fas fa-phone text-primary"></i>
+            <h4>Phone</h4>
+            <p>+123 456 7890</p>
+          </div>
+          <div class="info-box">
+            <i class="fas fa-envelope text-primary"></i>
+            <h4>Email</h4>
+            <p>info@example.com</p>
+          </div>
+          <div class="info-box">
+            <i class="fas fa-clock text-primary"></i>
+            <h4>Hours</h4>
+            <p>Mon-Sat: 9:00 AM - 6:00 PM<br>Sun: Closed</p>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+{% endblock content %}

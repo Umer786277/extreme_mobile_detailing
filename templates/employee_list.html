@@ -1,0 +1,172 @@
+{% extends "base.html" %}
+
+{% block title %}
+<title>Employee List</title>
+{% endblock title %}
+
+{% block content %}
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+  $(document).ready(function () {
+    // Sorting by Employee Name by Default
+    sortTableByColumn($('th.sortable:eq(2)'), true);
+
+    // Sorting function
+    $("th.sortable").click(function () {
+        sortTableByColumn($(this));
+    });
+
+    function sortTableByColumn(column, asc = null) {
+        var table = column.closest('table');
+        var index = column.index();
+        var rows = table.find('tr:gt(0)').toArray().sort(comparer(index));
+        if (asc === null) {
+            asc = !column.data('asc');
+        }
+        if (!asc) {
+            rows = rows.reverse();
+        }
+        for (var i = 0; i < rows.length; i++) {
+            table.append(rows[i]);
+        }
+        // Set data attribute to track sorting direction
+        column.data('asc', asc);
+    }
+
+    function comparer(index) {
+        return function (a, b) {
+            var valA = getCellValue(a, index),
+                valB = getCellValue(b, index);
+            return $.isNumeric(valA) && $.isNumeric(valB) ? valA - valB : valA.toString().localeCompare(valB);
+        };
+    }
+
+    function getCellValue(row, index) {
+        return $(row).children('td').eq(index).text();
+    }
+        // Pagination
+        var rowsPerPage = 10;
+        var table = $('.table');
+        var rows = table.find('tr:gt(0)');
+        var rowsCount = rows.length;
+        var pageCount = Math.ceil(rowsCount / rowsPerPage);
+        var currentPage = 1;
+
+        function showPage(page) {
+            var start = (page - 1) * rowsPerPage;
+            var end = start + rowsPerPage;
+            rows.hide().slice(start, end).show();
+        }
+
+        showPage(currentPage);
+
+        $('.pagination').append('<li class="page-item disabled"><a class="page-link" href="#" id="prev-page">Previous</a></li>');
+        for (var i = 1; i <= pageCount; i++) {
+            $('.pagination').append('<li class="page-item"><a class="page-link" href="#" id="page-' + i + '">' + i + '</a></li>');
+        }
+        $('.pagination').append('<li class="page-item"><a class="page-link" href="#" id="next-page">Next</a></li>');
+
+        $('.page-link').click(function (e) {
+            e.preventDefault();
+            var id = $(this).attr('id');
+            if (id === 'prev-page' && currentPage > 1) {
+                currentPage--;
+            } else if (id === 'next-page' && currentPage < pageCount) {
+                currentPage++;
+            } else if (id.startsWith('page-')) {
+                currentPage = parseInt(id.split('-')[1]);
+            }
+            showPage(currentPage);
+            updatePagination();
+        });
+
+        function updatePagination() {
+            $('#prev-page').parent().toggleClass('disabled', currentPage === 1);
+            $('#next-page').parent().toggleClass('disabled', currentPage === pageCount);
+            $('.page-item').removeClass('active');
+            $('#page-' + currentPage).parent().addClass('active');
+        }
+
+        // Searching
+        $('#search-button').click(function () {
+          var searchText = $('#search-input').val().toLowerCase();
+          $('.table tbody tr').each(function () {
+              var rowText = $(this).text().toLowerCase();
+              if (rowText.includes(searchText)) {
+                  $(this).show();
+              } else {
+                  $(this).hide();
+              }
+          });
+          currentPage = 1;
+          showPage(currentPage);
+          updatePagination();
+      });
+
+      // Trigger search on pressing Enter key in search input
+      $('#search-input').keypress(function (e) {
+          if (e.which === 13) { // 13 is the Enter key code
+              $('#search-button').click();
+          }
+      });
+  });
+</script>
+
+<h3 class="text  text-center  mb-2 p-4 bg-dark text-white">Employees Data</h3>
+<div class="container mt-5">
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6 col-lg-4"> <!-- Adjust the column size based on your preference -->
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control pg" id="search-input" placeholder="Search text">
+                    <button class="btn btn-outline-primary form-control" id="search-button">Search</button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Rest of your content -->
+    </div>
+    
+
+    <div class="table-responsive" style="overflow-x:auto;">
+        <table class="table align-middle mb-0 bg-white table-responsive-sm">
+            <thead class="heading newhead bg-light">
+                <tr>
+                    <th class="sortable">Employee ID</th>
+                    <th class="sortable">Hiring Test ID</th>
+                    <th class="sortable">Employee</th>
+                    <th class="sortable">Created At</th>
+                    <th class="sortable">Location</th>
+                    <th class="sortable">Latitude</th>
+                    <th class="sortable">Longitude</th>
+                </tr>
+            </thead>
+            <tbody class="heading tablfont">
+                {% for employee in employees %}
+                <tr>
+                    <td>{{ employee.employeeID }}</td>
+                    <td>{{ employee.Hiring_TestID }}</td>
+                    <td>
+                        <div class="d-flex flex-column flex-sm-row align-items-center">
+                            <img src="{{ employee.profilePicture }}" alt="Profile Picture"
+                                style="width: 45px; height: 45px"
+                                class="rounded-circle me-2 mb-2 mb-sm-0" />
+                            <div>
+                                <p class="fw-bold mb-1">{{ employee.firstName }} {{ employee.lastName }}</p>
+                                <p class="text-muted mb-0"> <i class="fas fa-envelope"></i>  {{ employee.email }}</p>
+                                <p class="text-muted mb-0"><i class="fas fa-phone"></i>{{ employee.phoneNumber }}</p>
+                            </div>
+                        </div>
+                    </td>
+                    <td>{{ employee.createdAt }}</td>
+                    <td>{{ employee.city }}, {{ employee.country }}</td>
+                    <td>{{ employee.latitude }}</td>
+                    <td>{{ employee.longitude }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <ul class="pagination justify-content-end"></ul>
+</div>
+{% endblock content %}

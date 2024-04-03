@@ -1,0 +1,116 @@
+{% extends "base.html" %}
+
+{% block title %} <title>Add Employee</title> {% endblock title %}
+
+{% block content %}
+   
+
+    <div class="form-container">
+        <div class="form-wrapper">
+            <h2 class="text-center mb-4">Add Employee</h2>
+            <form id="employeeForm">
+                <div class="mb-3">
+                    <label for="firstName" class="form-label">First Name</label>
+                    <input type="text" class="form-control" id="firstName" name="firstName" placeholder="First Name" required>
+                </div>
+                <div class="mb-3">
+                    <label for="firstName" class="form-label">Last Name</label>
+                    <input type="text" class="form-control" id="lastName" name="lastName" placeholder="Last Name" required>
+                </div>
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" class="form-control" id="email" name="email" required placeholder="Email">
+                </div>
+                <div class="mb-3">
+                    <label for="phoneNumber" class="form-label">Phone Number</label>
+                    <input type="tel" class="form-control" id="phoneNumber" name="phoneNumber" required placeholder="Contact Number">
+                </div>
+                <div class="row mb-3">
+                    <div class="col">
+                        <label for="latitude" class="form-label">Latitude</label>
+                        <input type="text" class="form-control" id="latitude" name="latitude" required placeholder="Latitude">
+                    </div>
+                    <div class="col">
+                        <label for="longitude" class="form-label">Longitude</label>
+                        <input type="text" class="form-control" id="longitude" name="longitude" required placeholder="Longitude" required>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col">
+                        <label for="country" class="form-label">Country</label>
+                        <input type="text" class="form-control" id="country" name="country" required placeholder="Country">
+                    </div>
+                    <div class="col">
+                        <label for="country" class="form-label">City</label>
+                        <input type="text" class="form-control" id="city" name="city" required placeholder="City" required>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="employeeID" class="form-label">Employee ID</label>
+                    <input type="text" class="form-control" id="employeeID" name="employeeID" required placeholder="Employee ID" required>
+                </div>
+                <button type="button" class="btn btn-primary btn-lg btn-submit" style="border-radius: 10px;" onclick="submitForm()">Submit</button>
+            </form>
+        </div>
+    </div>
+    
+
+     <!-- Bootstrap JS (Optional) -->
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+     <script>
+        function submitForm() {
+            // Retrieve form input values
+            var firstName = document.getElementById('firstName').value;
+            var lastName = document.getElementById('lastName').value;
+            var email = document.getElementById('email').value;
+            var phoneNumber = document.getElementById('phoneNumber').value;
+            var latitude = document.getElementById('latitude').value;
+            var longitude = document.getElementById('longitude').value;
+            var employeeID = document.getElementById('employeeID').value;
+            var city = document.getElementById('city').value;
+            var country = document.getElementById('country').value;
+    
+            // Check if any field is empty
+            if (!firstName || !lastName || !email || !phoneNumber || !latitude || !longitude || !employeeID || !city || !country) {
+                alert('Please fill in all fields.');
+                return; // Stop further execution if any field is empty
+            }
+    
+            // Form data object
+            var formData = {
+                firstName: firstName,
+                lastName: lastName,
+                email: email,
+                phoneNumber: phoneNumber,
+                latitude: latitude,
+                longitude: longitude,
+                employeeID: employeeID,
+                city: city,
+                country: country
+            };
+    
+            // Submit form data
+            fetch('https://api.findofficers.com/hiring_test/add_employee', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(formData)
+            })
+            .then(response => {
+                if (response.ok) {
+                    alert('Employee added successfully!');
+                } else {
+                    alert('Error adding employee.');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        }
+    </script>
+    
+
+ {% endblock content %}

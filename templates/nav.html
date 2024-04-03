@@ -1,0 +1,47 @@
+
+
+  <header>
+    <nav class="navbar navbar-expand-lg navbar-light  bg-light sticky-top">
+        <div class="container">
+        <a class="navbar-brand hd"  href="#">
+          <img class="img-fluid img-responsive" style="height: 80px; border-radius:50%" src="" alt="">
+           CHEF FOOD
+          </a> 
+          <button class="navbar-toggler text-white" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon text-white"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+              <li class="nav-item p-1">
+                <a class="nav-link" aria-current="page" href="/">Home</a>
+              </li>
+              <li class="nav-item p-1">
+                <a class="nav-link" href="{% url 'about' %}">About Us</a>
+              </li>
+              <li class="nav-item dropdown p-1">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Services
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                  <li><a class="dropdown-item" href="{% url 'category_list' %}">Select by Category</a></li>
+                
+                </ul>
+              </li>
+              <li class="nav-item p-1">
+                <a class="nav-link" href="{% url 'contact' %}" tabindex="-1">Contact</a>
+              </li>
+              <li class="nav-item p-1">
+                <a href="https://wa.me/923055154190" class="btn nav-link">
+                  <i class="fab fa-whatsapp text-success fa-lg"></i> Call/WhatsApp: +92-03055154190
+                </a>
+              </li>
+        
+              <li class="nav-item p-1">
+                <a href="{% url 'category_list' %}" class="btn btn-primary btn-lg btn-hero">Book Now</a>
+               
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+</header>

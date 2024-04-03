@@ -1,0 +1,656 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+
+
+<style>
+
+    #box1{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        
+    
+        
+    }
+    .hd{
+        font-weight: 600;
+        font-size: 18px;
+    }
+    .btn-custom:hover {
+        /* Add your custom styles here */
+        background-color: #c3cbd3; /* Change to desired hover background color */
+        color:black; /* Change to desired hover text color */
+      }
+    
+      .dn{
+        color: red;
+      }
+    
+      .bt{
+        height: 60vh;
+        background-image: url(https://img.freepik.com/premium-photo/herb-spices-cooking-background_136595-562.jpg);
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+      }
+    
+      .parallax-container {
+        position: relative;
+        overflow-x: hidden;
+        overflow-y: auto;
+        height: 30vh; /* Adjust height as needed */
+    }
+    
+    .parallax {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+    }
+    
+    .parallax img {
+        width: 100%;
+        height: auto;
+        display: block;
+        object-fit: cover; /* Ensure the image covers the entire container */
+    }
+    .services-section {
+        padding: 50px 0;
+        text-align: center;
+      }
+      .service-card {
+        margin-left: 15px;
+        padding: 20px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        transition: all 0.2s ease-in-out;
+      }
+      .service-card:hover {
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+      }
+      .service-icon {
+        font-size: 36px;
+        margin-bottom: 10px;
+        color: #2667c2;
+      }
+      .service-title {
+        font-weight: bold;
+        margin-bottom: 5px;
+      }
+      .service-description {
+        line-height: 1.5;
+      }
+      .hero-section {
+        position: relative;
+        background-image: url('/static/images/heroo.png'); /* Replace 'car-wash-hero-image.jpg' with your actual image file */
+        background-size: cover;
+        background-position: center;
+        color: #141212;
+        padding: 100px 0;
+        height: 70vh;
+      }
+      .hero-content {
+        position: relative;
+        z-index: 1;
+       
+      }
+      .hero-content h1 {
+        font-size: 3rem;
+        margin-bottom: 30px;
+      }
+      .hero-content p {
+        font-size: 1.2rem;
+        margin-bottom: 40px;
+      }
+      .btn-hero {
+        font-size: 1.2rem;
+        padding: 15px 30px;
+      } 
+     
+      #hero-h1 {
+        overflow: hidden; /* Ensures the text is clipped */
+        white-space: nowrap; /* Keeps the text on a single line */
+        margin: 0 auto; /* Centers the text horizontally */
+        letter-spacing: .15em; /* Adjusts letter spacing */
+      }
+
+/* Responsive Styling */
+@media (max-width: 768px) {
+  .hero-section {
+    padding: 50px 0; /* Adjust padding for smaller screens */
+  }
+
+  .hero-content {
+    text-align: center;
+  }
+
+  .hero-content h1 {
+    font-size: 2rem; /* Adjust font size for smaller screens */
+    margin-bottom: 20px; /* Adjust margin for smaller screens */
+  }
+
+  .hero-content p {
+    font-size: 1rem; /* Adjust font size for smaller screens */
+    margin-bottom: 20px; /* Adjust margin for smaller screens */
+  }
+
+  .btn-hero {
+    font-size: 1rem; /* Adjust font size for smaller screens */
+    padding: 10px 20px; /* Adjust padding for smaller screens */
+  }
+}
+
+/* Responsive Styling for Mobile Screens */
+@media (max-width: 576px) {
+  .hero-section {
+    height: auto; /* Remove fixed height for mobile screens */
+  }
+
+  .hero-content {
+    padding: 50px 0; /* Add padding for smaller screens */
+  }
+
+  .hero-content h1 {
+    font-size: 5px; /* Adjust font size for mobile screens */
+    margin-bottom: 15px; /* Adjust margin for mobile screens */
+  }
+
+  .hero-content p {
+    font-size: 1rem; /* Adjust font size for mobile screens */
+    margin-bottom: 20px; /* Adjust margin for mobile screens */
+  }
+
+  .btn-hero {
+    font-size: 1rem; /* Adjust font size for mobile screens */
+    padding: 10px 20px; /* Adjust padding for mobile screens */
+  }
+}
+
+
+      .service-card {
+        transition: transform 0.3s ease-in-out; /* Add hover effect transition */
+      }
+      
+      .service-card:hover {
+        transform: scale(1.05); /* Slight scale on hover */
+      }
+      
+      .service-card .fas {
+        transition: color 0.3s ease-in-out; /* Add icon color hover effect */
+      }
+      
+      .service-card .fas:hover {
+        color: #007bff; /* Change icon color on hover (blue) */
+      }
+      
+      .before-after {
+        position: relative; /* Required for hover animation */
+      }
+      
+      .before-after .after {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0; /* Initially hide the "after" image */
+        transition: opacity 0.5s ease-in-out; /* Add hover animation transition */
+      }
+      
+      .service-card:hover .before-after .after {
+        opacity: 1; /* Reveal "after" image on hover */
+      }
+
+      .before-after img {
+        width: 100%; /* Adjust as needed */
+        height: auto;
+      }
+
+      .testimonials {
+        background-color: #f5f5f5;
+        padding: 5rem 0;
+      }
+      
+      .testimonial-card {
+        border: none;
+        border-radius: 5px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease-in-out;
+      }
+      
+      .testimonial-card:hover {
+        transform: scale(1.02); /* Slight scale up on hover */
+      }
+      
+      .card-text {
+        font-size: 16px;
+        line-height: 1.5;
+      }
+      
+      .star-rating {
+        font-size: 1.2rem;
+        color: #007bff;
+      }
+    
+
+          /* Center content for small screens */
+    @media (max-width: 576px) {
+      .text-center-sm {
+        text-align: center;
+      }
+    }
+
+    .t1{
+      background-image: url('https://www.shutterstock.com/image-vector/car-wash-design-many-water-600nw-531841153.jpg');
+    }
+
+      
+      
+</style>
+
+    
+   
+
+<section class="hero-section">
+    <div class="container hero-conten he">
+      <h1 id="hero-h1"></h1>  
+      <p>The professionals at our facility are ready to help!</p>
+      <a href="{% url 'category_list' %}" class="btn btn-primary text-white fs-5 btn-lg btn-hero">Book Now</a>
+    </div>
+  </section>
+
+
+  <section class="services-section container">
+    <h2>Our Dazzling Services</h2>
+    <p>We offer a range of car detailing packages to keep your vehicle looking its best.</p>
+    <div class="row">
+      <div class="col-md-4">
+        <div class="service-card">
+          <i class="fas fa-tint service-icon"></i>
+          <h4 class="service-title">Exterior Wash</h4>
+          <p class="service-description">
+            Our exterior wash is perfect for removing dirt, mud, and road grime from your vehicle's exterior surfaces, leaving it sparkling clean.
+          </p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="service-card">
+          <i class="fas fa-tint service-icon"></i>
+          <h4 class="service-title">Interior Detailing</h4>
+          <p class="service-description">
+            Treat your car to our interior detailing service, which includes thorough cleaning of all interior surfaces, vacuuming, and upholstery treatment.
+          </p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="service-card">
+          <i class="fas fa-tint service-icon"></i>
+          <h4 class="service-title">Complete Detail</h4>
+          <p class="service-description">
+            Our complete detail package covers both interior and exterior cleaning, ensuring your car looks and feels brand new inside and out.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+
+          <section class="services-section container">
+            <p class="text text-primary">See Advantages</p>
+            <h2 class="txet text-primary mb-2">Why you should choose us ?</h2>
+            <p class="mb-5"> Our team comprises skilled professionals who are passionate about cars. <br> With years of experience in the industry, we have honed our techniques to deliver exceptional results every time.</p>
+            <div class="row">
+              <div class="col-md-3">
+                <div class="service-card">
+                  <i class="fas fa-tint service-icon"></i>
+                  <h4 class="service-title">Auto spa facility</h4>
+                  <p class="service-description">
+                    We're more than your average car wash. We can tailor fit your needs with detailed hand washing, both interior and exterior, for those who want a little extra attention to detail. If you're in a hurry take a trip through our express lane machine wash!
+                  </p>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="service-card">
+                  <i class="fas fa-shield-alt text-primary fa-2x mb-2"></i>
+                  <h4 class="service-title">Safety First</h4>
+                  <p class="service-description">
+                    We don't use any products or machinery that may damage your car. An attendant is always at the controls supervising your wash to ensure the safety of your vehicle. We treat every car as if it were our own.
+                  </p>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="service-card">
+                  <i class="fas fa-user-tie fa-2x mb-2 text-primary"></i>
+                  <h4 class="service-title">Talneted Workers</h4>
+                  <p class="service-description">
+                    We catch problems before they happen. We continuously inspect our equipment and run daily, weekly, and monthly equipment tests to make sure our tunnels are running at full capacity.
+                  </p>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="service-card">
+                  <i class="fas fa-handshake fa-2x text-primary mb-2"></i>
+                  <h4 class="service-title">Our Promise</h4>
+                  <p class="service-description">
+                    We are truly a 100% satisfaction guaranteed business. At the end of each of your wash, opt in for the final inspection where we walk through your service and make sure we've met your expectations!
+
+
+                  </p>
+                </div>
+              </div>
+            </div>
+            </section>
+        
+   
+         
+    
+            
+
+
+               <!--Section 3-->
+               <div class="container-fluid mt-4 p-5 bg-primary mt-md-4">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-3 col-sm-6">
+                            <h2 id="savings" class="text-center-sm">0+</h2>
+                            <p class="text-center-sm">Happy Clients</p>
+                        </div>
+                        <div class="col-md-3 col-sm-6">
+                            <h2 id="photos" class="text-center-sm">0+</h2>
+                            <p class="text-center-sm">Car Washed</p>
+                        </div>
+                        <div class="col-md-3 col-sm-6">
+                            <h2 id="rockets" class="text-center-sm">0+</h2>
+                            <p class="text-center-sm">Vehicles</p>
+                        </div>
+                        <div class="col-md-3 col-sm-6">
+                            <h2 id="globes" class="text-center-sm">0+</h2>
+                            <p class="text-center-sm">Trucks</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+          
+          
+            <div class="t1">
+              <section class="testimonials py-5">
+                <div class="container-fluid">
+                  <h2 class="text-center mb-4 text-primary">What Our Clients Say</h2>
+                  <div id="testimonialCarousel" class="carousel slide" data-ride="carousel">
+                    <div class="carousel-inner">
+                      <div class="carousel-item active">
+                        <div class="testimonial-card card shadow">
+                          <img src="{% static 'images/cl1.webp' %}" class="card-img-top img-fluid mt-2" style="height: 120px; border-radius: 50%; width: 200px; margin: 0 auto;" alt="Client 1">
+                          <div class="card-body text-center">
+                            <p class="card-text">Working with this company has been a fantastic experience.  <br>Their attention to detail and commitment to delivering high-quality results exceeded our expectations.</p>
+                            <div class="d-flex justify-content-between align-items-center flex-column">
+                              <h5 class="card-title mb-0">John Doe</h5>
+                              <div class="star-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                              </div>
+                              
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- Second Testimonial -->
+                      <div class="carousel-item">
+                        <div class="testimonial-card card shadow">
+                          <img src="{% static 'images/cl2.webp' %}" class="card-img-top img-fluid mt-2" style="height: 120px; border-radius: 50%; width: 200px; margin: 0 auto;" alt="Client 2">
+                          <div class="card-body text-center">
+                            <p class="card-text">I have been impressed by the professionalism and dedication of the team at this company. <br> They consistently go above and beyond to meet our needs and deliver exceptional results.</p>
+                            <div class="d-flex justify-content-between align-items-center flex-column">
+                              <h5 class="card-title mb-0">Jane Smith</h5>
+                              <div class="star-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                              </div>
+                              
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- Third Testimonial -->
+                      <div class="carousel-item">
+                        <div class="testimonial-card card shadow">
+                          <img src="{% static 'images/cl3.jpg' %}" class="card-img-top img-fluid mt-2" style="height: 120px; border-radius: 50%; width: 200px; margin: 0 auto;" alt="Client 3">
+                          <div class="card-body text-center">
+                            <p class="card-text">I highly recommend this company to anyone looking for top-notch services. <br> Their team is knowledgeable, responsive, and always willing to go the extra mile to ensure client satisfaction.</p>
+                            <div class="d-flex justify-content-between align-items-center flex-column">
+                              <h5 class="card-title mb-0">Alice Johnson</h5>
+                              <div class="star-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                              </div>
+                             
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-target="#testimonialCarousel" data-slide="prev">
+                      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                      <span class="text-info"><i class="fas fa-chevron-left"></i></span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-target="#testimonialCarousel" data-slide="next">
+                      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                      <span class="text-info"><i class="fas fa-chevron-right"></i></span>
+                    </button>
+                  </div>
+                </div>
+              </section>
+            </div>
+            
+            
+         
+         
+    
+    
+   
+
+  <!--Section 5-->
+
+
+  
+  <div class="container mt-5 mb-3">
+    <h1 class="text-center text-primary mb-4">Frequently Asked Questions</h1>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="accordion" id="faqAccordion1">
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingOne">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                            How often should I wash my car?
+                        </button>
+                    </h2>
+                    <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#faqAccordion1">
+                        <div class="accordion-body">
+                            It's recommended to wash your car every two weeks to maintain its appearance and protect its paint.
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingTwo">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                            What types of car wash services do you offer?
+                        </button>
+                    </h2>
+                    <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#faqAccordion1">
+                        <div class="accordion-body">
+                            We offer a variety of car wash services including exterior wash, interior cleaning, waxing, and detailing.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="accordion" id="faqAccordion2">
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingThree">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                            Can I wash my car at home?
+                        </button>
+                    </h2>
+                    <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#faqAccordion2">
+                        <div class="accordion-body">
+                            While you can wash your car at home, professional car wash services often provide better results and are more environmentally friendly.
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingFour">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                            How long does it take to wash my car?
+                        </button>
+                    </h2>
+                    <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#faqAccordion2">
+                        <div class="accordion-body">
+                            The duration of a car wash depends on the specific services you choose and the condition of your vehicle. Typically, it takes around 15 to 30 minutes.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+    
+
+
+
+
+
+
+    <script>
+
+        
+           
+ // Text to be typed out
+ var text = "In hurry and need a car wash?";
+
+ // Index of current character being typed
+ var index = 0;
+
+ // Reference to the H1 element
+ var h1Element = document.getElementById("hero-h1");
+
+ // Function to type out the text
+ function typeWriter() {
+   if (index < text.length) {
+     h1Element.textContent += text.charAt(index);
+     index++;
+     setTimeout(typeWriter, 100); // Adjust typing speed here (milliseconds)
+   }
+ }
+
+ // Start typing when page is loaded
+ window.onload = typeWriter;
+
+
+
+
+
+        // Function to generate a random number between 100 and 1000
+        function generateRandomNumber() {
+            return Math.floor(Math.random() * 901) + 100; // Random number between 100 and 1000
+        }
+
+        // Function to update numbers incrementally
+        function updateNumbers() {
+            var savingsCounter = 0;
+            var photosCounter = 0;
+            var rocketsCounter = 0;
+            var globesCounter = 0;
+
+            // Function to increment numbers and update on frontend
+            function incrementNumbers() {
+                document.getElementById("savings").textContent = savingsCounter++ + "+";
+                document.getElementById("photos").textContent = photosCounter++ + "+";
+                document.getElementById("rockets").textContent = rocketsCounter++ + "+";
+                document.getElementById("globes").textContent = globesCounter++ + "+";
+
+                // Repeat every 200 milliseconds until reaching the target numbers
+                if (savingsCounter <= 127 || photosCounter <= 247 || rocketsCounter <= 349 || globesCounter <= 494) {
+                    setTimeout(incrementNumbers, 5);
+                }
+            }
+
+            // Start incrementing numbers
+            incrementNumbers();
+        }
+
+        // Call the function to update numbers when the page loads
+        window.addEventListener("load", function() {
+            // Generate random numbers for each counter
+            var targetSavings = generateRandomNumber();
+            var targetPhotos = generateRandomNumber();
+            var targetRockets = generateRandomNumber();
+            var targetGlobes = generateRandomNumber();
+
+            document.getElementById("savings").textContent = targetSavings + "+";
+            document.getElementById("photos").textContent = targetPhotos + "+";
+            document.getElementById("rockets").textContent = targetRockets + "+";
+            document.getElementById("globes").textContent = targetGlobes + "+";
+
+            // Start incrementing numbers
+            updateNumbers();
+        });
+
+
+        $(document).ready(function(){
+            // Activate the first testimonial item
+            $('.carousel-item').first().addClass('active');
+            
+            // Set interval for carousel to automatically change testimonials every 5 seconds
+            $('#testimonialCarousel').carousel({
+              interval: 5000
+            });
+        
+            // Pause carousel on mouse hover
+            $('#testimonialCarousel').hover(function(){
+              $(this).carousel('pause');
+            }, function(){
+              $(this).carousel('cycle');
+            });
+          });
+
+
+          $(document).ready(function(){
+            $('.parallax').parallax();
+        });
+        
+    </script>
+
+        </main>
+
+       
+
+
+
+
+
+       
+
+
+{% endblock content %}

@@ -1,0 +1,90 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+<title>
+Categories||
+</title>
+
+{% endblock title %}
+{% block content %}
+
+<style>
+  /* Style the main container */
+  main.container-fluid {
+    padding: 4rem;
+    
+  }
+
+  /* Style the category list */
+  .category-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  /* Style the category item */
+  .category-item {
+    margin: 1rem;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  }
+
+  /* Hover effect for category item */
+  .category-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+
+  /* Style the category link */
+  .category-link {
+    display: block;
+    padding: 1.5rem;
+    text-decoration: none;
+    color: #333333;
+    font-size: 1.2rem;
+    font-weight: bold;
+    text-align: center;
+    border-radius: 10px;
+  }
+
+  /* Background color for category link on hover */
+  .category-link:hover {
+    background-color: #f0f0f0;
+  }
+
+  /* Additional content */
+  .content-text {
+    text-align: center;
+    margin-bottom: 2rem;
+    color: #6c757d;
+  }
+
+</style>
+<div class="categories-container"> 
+<main class="container-fluid">
+  <h3 class="text-center mb-4 ">Select a Category</h3>
+  <p class="content-text ">Browse through the categories below to explore services offered by each category.</p>
+  <div class="row">
+    <div class="col-md-12">
+      {% if data %}
+        <ul class="category-list">
+          {% for cat in data %}
+            <li class="category-item">
+              <a class="category-link" href="{% url 'category-service-list' cat.id %}">{{ cat.name }}</a>
+            </li>
+          {% endfor %}
+        </ul>
+      {% else %}
+        <p class="content-text">No categories available.</p>
+      {% endif %}
+    </div>
+  </div>
+</main>
+</div>
+
+{% endblock %}

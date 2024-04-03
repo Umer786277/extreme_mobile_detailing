@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}
+
+<title>About ||</title>
+
+{% endblock title %}
+
+{% block content %}
+
+
+<style>
+    .ab{
+        background-image: url('/static/images/about1.webp');
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        height: 40vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        color: white;
+
+      }
+</style>
+
+<div class="conatner-fluid ab">
+    <div class="d-flex justify-content-center align-items-center">
+    <h1 >About Us</h1>
+    </div>
+    <div class="text-white">
+      <a href="/" class=" text-white ms-3 fs-4 fw-bold" style="text-decoration: none;">Home</a>
+      
+      <a href="{% url 'about' %}" class=" text-white ms-3 fs-4 fw-bold" style="text-decoration: none;">About Us</a>
+    </div>
+ </div>
+<section class="about-us container py-5">
+    <div class="row align-items-center">
+      <div class="col-md-6">
+        <img src="{% static 'images/about2.webp' %}" alt="Car wash facility" class="img-fluid rounded-5" style="height: 500px; width:600px; border-radius: 30%;">
+      </div>
+      <div class="col-md-6">
+        <p class="text text-primary mb-4">Who We Are</p>
+        <h2>Professional washing and claening of your car</h2>
+        <p class="mb-5">Professional washing and cleaning of your car. We opened CleanBanditCarwash to provide the best service in town, save customers time and money, and connect with our community. By visiting us, customers can keep their cars in top condition without the expense and hassle of doing it themselves. Our team is trained to work efficiently and thoroughly, ensuring that every customer receives a premium experience. We believe in creating a welcoming environment where customers can feel at home and develop a connection with our team.</p>
+
+        </div>
+        </div>
+
+  
+        <div class="row mt-5">
+          <div class="col-md-6">
+            <i class="fa fa-thumbs-up text-primary fa-lg mb-2" aria-hidden="true"></i>
+            <h2 class="text text-primary">Our Mission, Vision, Values</h2>
+            <p>At our carwash, our mission is to provide a top-quality service that adds value to our community. We believe that by taking care of our customers' cars, we're not only helping them maintain their investments but also contributing to a cleaner and more sustainable environment.Our vision is to be the leading carwash in our area, recognized for our exceptional service and commitment to customer satisfaction. We strive to create a welcoming and friendly environment where customers can feel at home and confident in the services we provide.</p>
+            <ul class="list-unstyled">
+                <li class="mb-2"><i class="fas fa-star me-2 text-primary"></i> <span style="color: rgb(78, 14, 139); font-size:larger"> Quality:</span> We're committed to delivering the highest quality service possible...</li>
+                <li class="mb-2"><i class="fas fa-user-smile me-2 text-primary"></i><span style="color: rgb(78, 14, 139); font-size:larger"> Customer service: </span> We prioritize customer satisfaction...</li>
+                <li><i class="fas fa-leaf me-2 text-primary"></i> <span style="color: rgb(78, 14, 139); font-size:larger"> Sustainability: </span> We recognize the importance of conserving water...</li>
+              </ul>
+          </div>
+
+          <div class="col-md-6">
+            <i class="fas fa-star text-primary fa-lg me-2 mb-2"></i>
+            <h2 class="text text-primary">Inspiring People to Shine</h2>
+            <p>At our carwash, we make people shine by offering top-quality car wash and detailing services, prioritizing exceptional customer service, and constantly innovating to improve the customer experience. We believe that by taking care of our customers' vehicles, we're helping them feel proud and confident on the road.</p>
+          </div>
+        
+        </div>
+  
+        
+       
+        
+      
+    
+  </section>
+
+  
+  
+
+{% endblock content %}
