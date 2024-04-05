@@ -24,7 +24,7 @@ Hey there! I'm Umer Farooq, and I'm excited to introduce you to Extreme Mobile D
 - JavaScript
 - Stripe Integration
 
-**Why SparkleWash Stands Out:**
+**Why Stands Out:**
 
 **User-Centric Design:** Our focus on user experience shines through in every aspect of SparkleWash, from our intuitive interface to our seamless payment process.
 
